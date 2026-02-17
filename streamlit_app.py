@@ -10,6 +10,22 @@ import os
 import time
 from datetime import datetime
 import glob
+import sys
+
+# Install Playwright browsers on first run (for Streamlit Cloud)
+@st.cache_resource
+def install_playwright():
+    """Install Playwright browsers on first run"""
+    try:
+        subprocess.run([sys.executable, "-m", "playwright", "install", "chromium"], 
+                      check=True, capture_output=True)
+        return True
+    except Exception as e:
+        st.warning(f"Playwright installation in progress... {e}")
+        return False
+
+# Initialize Playwright
+install_playwright()
 
 # Page configuration
 st.set_page_config(
