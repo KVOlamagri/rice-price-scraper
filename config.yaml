@@ -1,0 +1,60 @@
+# Rice Price Scraping Configuration
+
+# Scraping Schedule
+schedule:
+  day: "Monday"  # Day of the week to scrape
+  time: "09:00"  # Time in Dubai timezone (UTC+4)
+  timezone: "Asia/Dubai"
+
+# Target Categories
+categories:
+  - "BASMATI"
+  - "SELLA"
+  - "JASMINE"
+
+# Regex patterns for filtering products
+filters:
+  sella_pattern: "(?i)sella"
+  basmati_pattern: "(?i)basmati"
+  jasmine_pattern: "(?i)jasmine"
+
+# Carrefour Settings (Playwright-based)
+carrefour:
+  uae:
+    base_url: "https://www.carrefouruae.com"
+    search_url: "https://www.carrefouruae.com/mafuae/en/search"
+    search_term: "rice basmati jasmine"
+  ksa:
+    base_url: "https://www.carrefourksa.com"
+    search_url: "https://www.carrefourksa.com/mafsau/en/search"
+    search_term: "rice basmati jasmine"
+
+# Lulu Settings (Playwright-based)
+lulu:
+  uae:
+    base_url: "https://gcc.luluhypermarket.com"
+    search_url: "https://gcc.luluhypermarket.com/en-ae/list/"
+    search_term: "basmati rice"
+  ksa:
+    base_url: "https://gcc.luluhypermarket.com"
+    search_url: "https://gcc.luluhypermarket.com/en-sa/list/"
+    search_term: "basmati rice"
+
+# Retry Settings
+retry:
+  max_attempts: 3
+  delay_seconds: 2
+  backoff_multiplier: 2
+
+# Output Settings
+output:
+  csv_enabled: true
+  excel_enabled: true
+  output_dir: "output"
+  filename_format: "rice_prices_{date}_{retailer}_{country}.{ext}"
+
+# Logging
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR, CRITICAL
+  file: "logs/scraper.log"
+  console: true
